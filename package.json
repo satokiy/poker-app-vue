@@ -18,6 +18,11 @@
       "stylelint --fix"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'from husky'"
+    }
+  },
   "dependencies": {
     "@mdi/font": "5.9.55",
     "core-js": "^3.8.3",
