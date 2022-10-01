@@ -7,17 +7,22 @@
       <v-row justify="center">
         <h1>check a poker hand</h1>
       </v-row>
+      <v-row justify="center">
+        <!-- <card-screen></card-screen> -->
+      </v-row>
       <v-row justify="center" class="input">
         <v-col cols="6">
-          <card-input></card-input>
+          <card-input :hand="reactiveHand.hand"></card-input>
         </v-col>
       </v-row>
       <v-row justify="center">
         <v-col cols="3">
-          <v-btn
-          @click="check"
-          color="cyan lighten-4"
-          block>check!!</v-btn>
+          <v-btn @click="draw" color="cyan lighten-4" block>card draw!!</v-btn>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="3">
+          <v-btn @click="check" color="cyan lighten-4" block>check!!</v-btn>
         </v-col>
       </v-row>
     </v-main>
@@ -26,10 +31,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import HeaderInfo from "../composables/HeaderInfo.vue";
 import FooterInfo from "../composables/FooterInfo.vue";
 import CardInput from "../components/CardInput.vue";
+import CardScreen from "../components/CardScreen.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -37,15 +43,31 @@ export default defineComponent({
     const check = () => {
       console.log("check");
     };
+
+    const reactiveHand = reactive({
+      hand: '',
+    });
+    const draw = () => {
+      // clickイベントによってカードの取得を行いCardScreenに連携する
+      const cards = ["H1", "H2", "H3", "H4", "H5"];
+
+      console.log(cards.join(' '));
+      reactiveHand.hand = cards.join(' ');
+      console.log(reactiveHand.hand);
+    };
+
     return {
+      reactiveHand,
       check,
+      draw,
     };
   },
   components: {
     HeaderInfo,
     FooterInfo,
     CardInput,
-  }
+    //CardScreen,
+  },
 });
 </script>
 
