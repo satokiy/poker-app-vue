@@ -1,91 +1,85 @@
-<template>
+<template class="CardInput">
   <v-form>
     <v-text-field
       class="input"
-      v-model="$props.hand"
-      label="カードを入力してください"
-      
+      v-model="state.hand"
       outlined
-      clearable
-      @input="v$.inputCards.$touch()"
-      @blur="v$.inputCards.$touch()"
+      disabled
     >
-  </v-text-field>
+    </v-text-field>
     <!-- <div class="error-msg" v-for="error in v$.inputCards.$errors" :key="error.$uid">
       {{ error.$message }}
     </div> -->
-    <ul>
-      <li v-for="(card,index) in hand" :key=index>
-        {{ card }}
-      </li>
-    </ul>
-    <span> {{ getHand() }}</span>
-    
-    <!-- {{ inputCards }} -->
+    <v-row class="Result">
+      <v-col cols="12">
+        {{ state.result }}
+      </v-col>
+    </v-row>
+    <v-row justify="center" class="button">
+      <v-col cols="6">
+        <v-btn @click="draw" color="orange lighten-4" block>card draw!!</v-btn>
+      </v-col>
+      <v-col cols="6">
+        <v-btn @click="check" color="orange lighten-4" block>check!!</v-btn>
+      </v-col>
+    </v-row>
     
   </v-form>
-  <v-btn @click="validate()">validate</v-btn>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs } from "@vue/reactivity";
-import { useVuelidate } from '@vuelidate/core';
-import { required, minLength } from '@vuelidate/validators';
-import { computed, defineComponent } from "vue";
+import { reactive } from "@vue/reactivity";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  props: {
-    hand: {
-      type: String
-    },
-  },
-  setup(props) {
-  
-    const state = reactive({ hand : props.hand });
-    const getHand = () => {
-      return props.hand;
-    }
+  setup() {
+    const state = reactive({
+      hand: '',
+      result: '',
+    });
 
-    const rules = {
-      hand: { required, minLength: minLength(4) },
-    }
+    const draw = () => {
+      const cardsPattern = [
+        ["H1", "H2", "H3", "H4", "H5"],
+        ["D1", "D1", "D1", "D4", "D5"],
+        ["S1", "S2", "D3", "C4", "H5"],
+      ];
+      var rand = Math.floor(Math.random() * cardsPattern.length);
+      state.hand = cardsPattern[rand].join(" ");
+      state.result = '';
+      console.log(state.hand);
+    };
 
-    const v$ = useVuelidate(rules, state);
-
-    
-    const errors:string[] = [];
-    const validate = async () => {
-      await v$.value.$validate()
-      
-      console.log(v$)
-      
-      //errorMessages.push()
-    }
-    
-    const errorMessages = () => {
-      
-      // if (v$.inputCards.$dirty) return errors
+    const check = () => {
+      if (state.hand === 'D1 D1 D1 D4 D5') {
+        state.result = 'straight flash'
+      }
 
     };
+
     return {
-      getHand,
-      required,
-      validate,
-      v$,
-      errorMessages,
+      state,
+      draw,
+      check,
     };
   },
 });
 </script>
 
-<style>
-  .error-msg {
+<style lang="scss">
+.v-input input {
+  text-align: center;
+  font-size: 24px;
+}
+.v-label.v-field-label {
+  text-align: center;
+}
+.Result {
+  text-align: center;
+}
+.CardInput {
+  &__error-msg {
     color: red;
   }
-  .input input {
-    text-align: center
-  }
-  .input .v-label {
-    text-align: center
-  }
+}
 </style>

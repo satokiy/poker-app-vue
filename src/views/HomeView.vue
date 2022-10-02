@@ -15,16 +15,7 @@
           <card-input :hand="reactiveHand.hand"></card-input>
         </v-col>
       </v-row>
-      <v-row justify="center">
-        <v-col cols="3">
-          <v-btn @click="draw" color="cyan lighten-4" block>card draw!!</v-btn>
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols="3">
-          <v-btn @click="check" color="cyan lighten-4" block>check!!</v-btn>
-        </v-col>
-      </v-row>
+      
     </v-main>
   </v-container>
   <footer-info></footer-info>
