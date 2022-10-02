@@ -33,6 +33,11 @@ import CardInput from "../components/CardInput.vue";
 
 export default defineComponent({
   name: "HomeView",
+  components: {
+    HeaderInfo,
+    FooterInfo,
+    CardInput,
+  },
   setup() {
     const check = () => {
       console.log("check");
@@ -41,11 +46,7 @@ export default defineComponent({
       check,
     };
   },
-  components: {
-    HeaderInfo,
-    FooterInfo,
-    CardInput,
-  }
+
 });
 </script>
 
