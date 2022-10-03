@@ -1,4 +1,5 @@
 <template>
+  <div class="CardScreen">
   <v-col cols="2" v-for="(card, index) in cards" :key="index">
     <span v-if="card == null">
       <v-img max-height="150" max-width="150" :src="cardBack" alt=""> </v-img>
@@ -20,6 +21,7 @@
       </div>
     </v-col>
   </v-row>
+</div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -87,4 +89,10 @@ export default defineComponent({
     }
   }
 }
+</style>
+<style lang="scss">
+  .CardScreen {
+    border: 1px green solid;
+  }
+
 </style>

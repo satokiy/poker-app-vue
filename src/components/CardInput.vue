@@ -1,30 +1,28 @@
-<template class="CardInput">
-  <v-form>
-    <v-text-field
-      class="input"
-      v-model="state.hand"
-      outlined
-      disabled
-    >
-    </v-text-field>
-    <!-- <div class="error-msg" v-for="error in v$.inputCards.$errors" :key="error.$uid">
+<template>
+  <div class="CardInput">
+    <v-form>
+      <v-text-field class="input" v-model="state.hand" outlined disabled>
+      </v-text-field>
+      <!-- <div class="error-msg" v-for="error in v$.inputCards.$errors" :key="error.$uid">
       {{ error.$message }}
     </div> -->
-    <v-row class="Result">
-      <v-col cols="12">
-        {{ state.result }}
-      </v-col>
-    </v-row>
-    <v-row justify="center" class="button">
-      <v-col cols="6">
-        <v-btn @click="draw" color="orange lighten-4" block>card draw!!</v-btn>
-      </v-col>
-      <v-col cols="6">
-        <v-btn @click="check" color="orange lighten-4" block>check!!</v-btn>
-      </v-col>
-    </v-row>
-    
-  </v-form>
+      <v-row class="Result">
+        <v-col cols="12">
+          {{ state.result }}
+        </v-col>
+      </v-row>
+      <v-row justify="center" class="button">
+        <v-col cols="6">
+          <v-btn @click="draw" color="orange lighten-4" block
+            >card draw!!</v-btn
+          >
+        </v-col>
+        <v-col cols="6">
+          <v-btn @click="check" color="orange lighten-4" block>check!!</v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -34,8 +32,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   setup() {
     const state = reactive({
-      hand: '',
-      result: '',
+      hand: "",
+      result: "",
     });
 
     const draw = () => {
@@ -46,15 +44,14 @@ export default defineComponent({
       ];
       var rand = Math.floor(Math.random() * cardsPattern.length);
       state.hand = cardsPattern[rand].join(" ");
-      state.result = '';
+      state.result = "";
       console.log(state.hand);
     };
 
     const check = () => {
-      if (state.hand === 'D1 D1 D1 D4 D5') {
-        state.result = 'straight flash'
+      if (state.hand === "D1 D1 D1 D4 D5") {
+        state.result = "straight flash";
       }
-
     };
 
     return {
@@ -78,6 +75,7 @@ export default defineComponent({
   text-align: center;
 }
 .CardInput {
+  border: 1px solid blue;
   &__error-msg {
     color: red;
   }
