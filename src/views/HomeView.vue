@@ -34,6 +34,7 @@ export default defineComponent({
     HeaderInfo,
     FooterInfo,
     CardInput,
+    CardScreen,
   },
   setup() {
     const check = () => {
