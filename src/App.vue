@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-main>
+      <div class="App">
       <router-view/>
+    </div>
     </v-main>
   </v-app>
 </template>
@@ -18,3 +20,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+  .App {
+    border: 1px black solid;
+  }
+</style>

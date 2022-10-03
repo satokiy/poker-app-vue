@@ -1,31 +1,83 @@
 <template>
-  <v-form>
-    <v-text-field
-      v-model="inputCards"
-      label="カードを入力してください"
-      outlined
-      clearable
-      :rules="[required]"
-    ></v-text-field>
-    {{ inputCards }}
-  </v-form>
+  <div class="CardInput">
+    <v-form>
+      <v-text-field class="input" v-model="state.hand" outlined disabled>
+      </v-text-field>
+      <!-- <div class="error-msg" v-for="error in v$.inputCards.$errors" :key="error.$uid">
+      {{ error.$message }}
+    </div> -->
+      <v-row class="Result">
+        <v-col cols="12">
+          {{ state.result }}
+        </v-col>
+      </v-row>
+      <v-row justify="center" class="button">
+        <v-col cols="6">
+          <v-btn @click="draw" color="orange lighten-4" block
+            >card draw!!</v-btn
+          >
+        </v-col>
+        <v-col cols="6">
+          <v-btn @click="check" color="orange lighten-4" block>check!!</v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+  </div>
 </template>
 
 <script lang="ts">
-import { ref } from "@vue/reactivity";
-export default {
+import { reactive } from "@vue/reactivity";
+import { defineComponent } from "vue";
+
+export default defineComponent({
   setup() {
-    const inputCards = ref("");
-    const required = (value: string) => {
-      return !!value || "card is required";
+    const state = reactive({
+      hand: "",
+      result: "",
+    });
+
+    const draw = () => {
+      const cardsPattern = [
+        ["H1", "H2", "H3", "H4", "H5"],
+        ["D1", "D1", "D1", "D4", "D5"],
+        ["S1", "S2", "D3", "C4", "H5"],
+      ];
+      var rand = Math.floor(Math.random() * cardsPattern.length);
+      state.hand = cardsPattern[rand].join(" ");
+      state.result = "";
+      console.log(state.hand);
+    };
+
+    const check = () => {
+      if (state.hand === "D1 D1 D1 D4 D5") {
+        state.result = "straight flash";
+      }
     };
 
     return {
-      inputCards,
-      required,
+      state,
+      draw,
+      check,
     };
   },
-};
+});
 </script>
 
-<style></style>
+<style lang="scss">
+.v-input input {
+  text-align: center;
+  font-size: 24px;
+}
+.v-label.v-field-label {
+  text-align: center;
+}
+.Result {
+  text-align: center;
+}
+.CardInput {
+  border: 1px solid blue;
+  &__error-msg {
+    color: red;
+  }
+}
+</style>
