@@ -1,6 +1,6 @@
 <template>
   <v-toolbar
-  color="cyan lighten-4"
+  color="orange lighten-4"
   elevation="3"
 ></v-toolbar>
 </template>
