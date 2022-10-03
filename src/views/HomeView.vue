@@ -8,7 +8,7 @@
         <h1>check a poker hand</h1>
       </v-row>
       <v-row justify="center">
-        <!-- <card-screen></card-screen> -->
+        <card-screen></card-screen>
       </v-row>
       <v-row justify="center" class="input">
         <v-col cols="6">
@@ -57,12 +57,6 @@ export default defineComponent({
       check,
       draw,
     };
-  },
-  components: {
-    HeaderInfo,
-    FooterInfo,
-    CardInput,
-    //CardScreen,
   },
 });
 </script>
