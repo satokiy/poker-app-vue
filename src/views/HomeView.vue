@@ -3,11 +3,10 @@
   <header-info />
   <v-container>
     <v-main>
-      <router-view />
-      <v-row justify="center">
+      <v-row justify="center" margin-bottom="24px">
         <h1>check a poker hand</h1>
       </v-row>
-      <v-row justify="center">
+      <v-row justify="center" align-content="center">
         <card-screen></card-screen>
       </v-row>
       <v-row justify="center" class="input">

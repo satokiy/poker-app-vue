@@ -1,25 +1,19 @@
 <template>
   <div class="CardScreen">
-  <v-row>
-    <v-col cols="2">
-      <div class="Card">
-        <div class="Card__Back">
-          <v-img max-height="150" max-width="150" :src="rollCardBack"></v-img>
-        </div>
-        <div class="Card__Front">
-          <v-img max-height="150" max-width="150" :src="rollCardFront"></v-img>
-        </div>
-      </div>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-col>
-      <span>
-        {{ drawCards.hand }}
-      </span>
-    </v-col>
-  </v-row>
-</div>
+    <v-row justify="center" height="150px" dense>
+      <v-card
+        v-for="card in drawCards.hand"
+        :key="card"
+        width="16%"
+        min-height="100"
+        max-width="150"
+      >
+        <v-col>
+          {{ card }}
+        </v-col>
+      </v-card>
+    </v-row>
+  </div>
 </template>
 <script lang="ts">
 import { useDrawCard } from "@/stores/drawCard";
@@ -28,7 +22,7 @@ export default defineComponent({
   name: "CardScreen",
   setup() {
     const drawCards = useDrawCard();
-    
+
     const cardBack =
       "https://4.bp.blogspot.com/-A_98ygeh-hs/WRLiKxndvtI/AAAAAAABEKo/qNM7t47lNCw4Sq0hEwJH5xhUaN8lnJf5gCLcB/s800/card_back.png";
 
@@ -56,6 +50,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.CardScreen {
+  width: 60%;
+  min-height: 200px;
+  padding-top: 32px;
+  border: 1px red solid;
+}
+.v-card {
+  margin: 8px;
+  min-width: 64px;
+}
 .Card {
   min-height: 150px;
   width: 30%; /* 任意の横幅を指定 */
@@ -67,7 +71,6 @@ export default defineComponent({
     padding-top: 142.5%;
   }
   &__Back {
-
     transition: all 0.6s;
     position: absolute;
     left: 0;
@@ -93,10 +96,4 @@ export default defineComponent({
     }
   }
 }
-</style>
-<style lang="scss">
-  .CardScreen {
-    border: 1px green solid;
-  }
-
 </style>
