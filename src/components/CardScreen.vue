@@ -1,16 +1,7 @@
 <template>
   <div class="CardScreen">
-  <v-col cols="2" v-for="(card, index) in cards" :key="index">
-    <span v-if="card == null">
-      <v-img max-height="150" max-width="150" :src="cardBack" alt=""> </v-img>
-    </span>
-    <span v-else>
-      <v-img max-height="150" max-width="150" :src="card" alt=""> </v-img>
-    </span>
-  </v-col>
-
   <v-row>
-    <v-col>
+    <v-col cols="2">
       <div class="Card">
         <div class="Card__Back">
           <v-img max-height="150" max-width="150" :src="rollCardBack"></v-img>
@@ -21,13 +12,23 @@
       </div>
     </v-col>
   </v-row>
+  <v-row>
+    <v-col>
+      <span>
+        {{ drawCards.hand }}
+      </span>
+    </v-col>
+  </v-row>
 </div>
 </template>
 <script lang="ts">
+import { useDrawCard } from "@/stores/drawCard";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "CardScreen",
   setup() {
+    const drawCards = useDrawCard();
+    
     const cardBack =
       "https://4.bp.blogspot.com/-A_98ygeh-hs/WRLiKxndvtI/AAAAAAABEKo/qNM7t47lNCw4Sq0hEwJH5xhUaN8lnJf5gCLcB/s800/card_back.png";
 
@@ -44,6 +45,7 @@ export default defineComponent({
       "https://4.bp.blogspot.com/-A_98ygeh-hs/WRLiKxndvtI/AAAAAAABEKo/qNM7t47lNCw4Sq0hEwJH5xhUaN8lnJf5gCLcB/s800/card_back.png";
 
     return {
+      drawCards,
       cardBack,
       cards,
       rollCardFront,
@@ -55,6 +57,7 @@ export default defineComponent({
 
 <style lang="scss">
 .Card {
+  min-height: 150px;
   width: 30%; /* 任意の横幅を指定 */
   position: relative;
   cursor: pointer;
@@ -64,6 +67,7 @@ export default defineComponent({
     padding-top: 142.5%;
   }
   &__Back {
+
     transition: all 0.6s;
     position: absolute;
     left: 0;
