@@ -3,12 +3,11 @@
   <header-info />
   <v-container>
     <v-main>
-      <router-view />
-      <v-row justify="center">
+      <v-row justify="center" margin-bottom="24px">
         <h1>check a poker hand</h1>
       </v-row>
-      <v-row justify="center">
-        <!-- <card-screen></card-screen> -->
+      <v-row justify="center" align-content="center">
+        <card-screen></card-screen>
       </v-row>
       <v-row justify="center" class="input">
         <v-col cols="6">
@@ -30,6 +29,12 @@ import CardScreen from "../components/CardScreen.vue";
 
 export default defineComponent({
   name: "HomeView",
+  components: {
+    HeaderInfo,
+    FooterInfo,
+    CardInput,
+    CardScreen,
+  },
   setup() {
     const check = () => {
       console.log("check");
@@ -52,12 +57,6 @@ export default defineComponent({
       check,
       draw,
     };
-  },
-  components: {
-    HeaderInfo,
-    FooterInfo,
-    CardInput,
-    //CardScreen,
   },
 });
 </script>
