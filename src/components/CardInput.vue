@@ -1,8 +1,12 @@
 <template>
   <div class="CardInput">
     <v-form>
-      <v-text-field class="input" v-model="handString" outlined disabled>
-      </v-text-field>
+      <v-row>
+        <v-col cols="12">
+        <v-text-field class="input" v-model="handString" outlined disabled>
+        </v-text-field>
+      </v-col>
+      </v-row>
       <v-row class="CardInput__Result">
         <v-col cols="12">
           {{ drawCards.judgeResult }}
@@ -10,12 +14,10 @@
       </v-row>
       <v-row justify="center" class="CardInput__Button">
         <v-col cols="6">
-          <v-btn @click="draw" color="orange lighten-4" block
-            >card draw!!</v-btn
-          >
+          <v-btn @click="draw" color="orange lighten-4" block>draw</v-btn>
         </v-col>
         <v-col cols="6">
-          <v-btn @click="check" color="orange lighten-4" block>check!!</v-btn>
+          <v-btn @click="check" color="orange lighten-4" block>play</v-btn>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -41,7 +43,8 @@ export default defineComponent({
 
     const draw = () => drawCards.draw();
     const config = new Configuration({
-      basePath: 'https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev',
+      basePath:
+        "https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev",
     });
     const pokerApi = new PokerApi(config);
 
@@ -52,9 +55,9 @@ export default defineComponent({
     };
 
     const reset = () => {
-      drawCards.hand = ["","","","","",];
-      drawCards.judgeResult = ''
-    }
+      drawCards.hand = ["", "", "", "", ""];
+      drawCards.judgeResult = "";
+    };
 
     return {
       drawCards,
@@ -75,6 +78,12 @@ export default defineComponent({
   }
   &__Button {
     margin-bottom: 16px;
+  }
+  .v-btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
   }
   .v-input input {
     text-align: center;
