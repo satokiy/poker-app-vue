@@ -2,28 +2,24 @@
 
 ## Project setup
 ```
-npm install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn build
 ```
 
-### Run your unit tests
+### API clientの更新
+- openapi.yamlを下記リポジトリより取得
+  - https://github.com/satokiy/poker-api-nest
+- dockerによって更新
 ```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
+docker-compose -f docker-openapi-generate.yml up -d
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

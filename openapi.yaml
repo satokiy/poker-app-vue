@@ -1,0 +1,160 @@
+openapi: 3.0.0
+paths:
+  /poker:
+    get:
+      operationId: PokerController_welcome
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_0
+        - poker
+  /poker/draw:
+    get:
+      operationId: PokerController_draw
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawCardRequestDto'
+      tags: *ref_0
+  /poker/judge:
+    post:
+      operationId: PokerController_judgeRole
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PokerJudgeRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokerJudgeResponse'
+        '404':
+          description: ''
+      tags: *ref_0
+  /poker/play:
+    post:
+      operationId: PokerController_play
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayPokerRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PokerJudgeResponse'
+        '400':
+          description: bad request.
+      tags: *ref_0
+  /health-check:
+    get:
+      operationId: HealthCheckController_healthCheck
+      parameters: []
+      responses:
+        '200':
+          description: health-check is OK
+        '500':
+          description: ''
+      tags:
+        - health-check
+info:
+  title: Poker
+  description: The poker API description
+  version: '1.0'
+  contact: {}
+tags:
+  - name: poker
+    description: ''
+servers: []
+components:
+  schemas:
+    DrawCardRequestDto:
+      type: object
+      properties:
+        hand:
+          description: 手札
+          example:
+            - H1
+            - D2
+            - D3
+            - S4
+            - C5
+          type: array
+          items:
+            type: string
+      required:
+        - hand
+    PokerJudgeRequestDto:
+      type: object
+      properties:
+        hand:
+          type: string
+          description: 手札
+          example: H1 H2 H3 H4 H5
+      required:
+        - hand
+    PokerJudgeResponse:
+      type: object
+      properties:
+        hand:
+          type: string
+          description: 手札
+          example: H1 H2 H3 H4 H5
+        cardList:
+          description: カードリスト
+          example:
+            - H1
+            - H2
+            - H3
+            - H4
+            - H5
+          type: array
+          items:
+            type: string
+        role:
+          type: string
+          enum:
+            - STRAIGHT_FLASH
+            - FLASH
+            - STRAIGHT
+            - ONE_PAIR
+            - TWO_PAIR
+            - THREE_CARD
+            - FOUR_CARD
+            - FULL_HOUSE
+            - NO_ROLE
+          description: 役
+          example: STRAIGHT_FLASH
+      required:
+        - hand
+        - cardList
+        - role
+    PlayPokerRequestDto:
+      type: object
+      properties:
+        handList:
+          description: 手札のリスト
+          example:
+            - H1 H2 H3 H4 H5
+            - D1 D2 D3 D4 D5
+            - D1 D2 D3 D4 D5
+          type: array
+          items:
+            type: string
+      required:
+        - handList

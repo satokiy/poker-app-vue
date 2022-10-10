@@ -14,7 +14,9 @@
           <card-input :hand="reactiveHand.hand"></card-input>
         </v-col>
       </v-row>
-      
+      <v-row>
+        <v-btn @click="check">test</v-btn>
+      </v-row>
     </v-main>
   </v-container>
   <footer-info></footer-info>
@@ -26,6 +28,8 @@ import HeaderInfo from "../composables/HeaderInfo.vue";
 import FooterInfo from "../composables/FooterInfo.vue";
 import CardInput from "../components/CardInput.vue";
 import CardScreen from "../components/CardScreen.vue";
+import { PokerApi } from "@/../client/src/api/generated/api";
+import { Configuration } from "@/../client/src/api/generated/configuration";
 
 export default defineComponent({
   name: "HomeView",
@@ -36,19 +40,25 @@ export default defineComponent({
     CardScreen,
   },
   setup() {
-    const check = () => {
-      console.log("check");
+    const config = new Configuration({
+      basePath: 'https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev',
+    });
+
+    const check = async () => {
+      const pokerApi = new PokerApi(config);
+      const response = await pokerApi.pokerControllerWelcome();
+      console.log(response.data);
     };
 
     const reactiveHand = reactive({
-      hand: '',
+      hand: "",
     });
     const draw = () => {
       // clickイベントによってカードの取得を行いCardScreenに連携する
       const cards = ["H1", "H2", "H3", "H4", "H5"];
 
-      console.log(cards.join(' '));
-      reactiveHand.hand = cards.join(' ');
+      console.log(cards.join(" "));
+      reactiveHand.hand = cards.join(" ");
       console.log(reactiveHand.hand);
     };
 
