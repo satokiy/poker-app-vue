@@ -50,7 +50,6 @@ export default defineComponent({
 
     const check = async () => {
       const response = await pokerApi.pokerControllerWelcome();
-      console.log(process.env);
       return response.data;
     };
 
