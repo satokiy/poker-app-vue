@@ -1,4 +1,68 @@
-export const cardImageMapper = {
+export interface cardImageMapperIf {
+  // back
+  back: string;
+  // Heart
+  "♥A": string;
+  "♥2": string;
+  "♥3": string;
+  "♥4": string;
+  "♥5": string;
+  "♥6": string;
+  "♥7": string;
+  "♥8": string;
+  "♥9": string;
+  "♥10": string;
+  "♥J": string;
+  "♥Q": string;
+  "♥K": string;
+
+  // Spade
+  "♠A": string;
+  "♠2": string;
+  "♠3": string;
+  "♠4": string;
+  "♠5": string;
+  "♠6": string;
+  "♠7": string;
+  "♠8": string;
+  "♠9": string;
+  "♠10": string;
+  "♠J": string;
+  "♠Q": string;
+  "♠K": string;
+
+  // Club
+  "♣A": string;
+  "♣2": string;
+  "♣3": string;
+  "♣4": string;
+  "♣5": string;
+  "♣6": string;
+  "♣7": string;
+  "♣8": string;
+  "♣9": string;
+  "♣10": string;
+  "♣J": string;
+  "♣Q": string;
+  "♣K": string;
+  // Diamond
+  "♦A": string;
+  "♦2": string;
+  "♦3": string;
+  "♦4": string;
+  "♦5": string;
+  "♦6": string;
+  "♦7": string;
+  "♦8": string;
+  "♦9": string;
+  "♦10": string;
+  "♦J": string;
+  "♦Q": string;
+  "♦K": string;
+  joker: string;
+}
+
+export const cardImageMapper: cardImageMapperIf = {
   // back
   back: "/assets/img/card_back.png",
   // Heart
