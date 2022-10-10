@@ -7,10 +7,12 @@
         <h1>Play Poker</h1>
       </v-row>
       <v-row justify="center" align-content="center">
-        <card-screen></card-screen>
+        <v-col cols="12" sm="8" md="8" lg="8">
+          <card-screen></card-screen>
+        </v-col>
       </v-row>
       <v-row justify="center" class="input">
-        <v-col cols="6">
+        <v-col cols="12" sm="6" md="6" lg="6">
           <card-input :hand="reactiveHand.hand"></card-input>
         </v-col>
       </v-row>
@@ -35,7 +37,6 @@ export default defineComponent({
     CardScreen,
   },
   setup() {
-
     const reactiveHand = reactive({
       hand: "",
     });

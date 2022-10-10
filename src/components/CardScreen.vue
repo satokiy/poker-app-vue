@@ -45,7 +45,6 @@ export default defineComponent({
 
 <style lang="scss">
 .CardScreen {
-  width: 60%;
   min-height: 300px;
   padding-top: 32px;
   // border: 1px red solid;
