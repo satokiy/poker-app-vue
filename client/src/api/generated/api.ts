@@ -49,10 +49,10 @@ import {
 export interface DrawCardRequestDto {
   /**
    * 手札
-   * @type {Array<string>}
+   * @type {Array<object>}
    * @memberof DrawCardRequestDto
    */
-  hand: Array<string>;
+  hand: Array<object>;
 }
 /**
  *
