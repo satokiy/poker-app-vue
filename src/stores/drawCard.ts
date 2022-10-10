@@ -1,20 +1,34 @@
 import { defineStore } from "pinia";
+import { PokerApi } from "@/../client/src/api/generated/api";
+import { Configuration } from "@/../client/src/api/generated/configuration";
+
+type card = {
+  value: string;
+  suit: string;
+  rank: number;
+  label: string;
+};
+
+const config = new Configuration({
+  basePath: "https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev",
+});
+const pokerApi = new PokerApi(config);
 
 export const useDrawCard = defineStore("drawCard", {
   state: () => ({
-    hand: [] as string[],
+    hand: ["", "", "", "", ""] as string[],
     judgeResult: "",
   }),
   actions: {
-    draw() {
-      const cardsPattern = [
-        ["H1", "H2", "H3", "H4", "H5"],
-        ["D1", "D1", "D1", "D4", "D5"],
-        ["S1", "S2", "D3", "C4", "H5"],
-      ];
-      const rand = Math.floor(Math.random() * cardsPattern.length);
-      this.hand = cardsPattern[rand];
-      console.log(this.hand);
+    async draw() {
+      const response = await pokerApi.pokerControllerDraw();
+      const cards = response.data.hand as card[];
+      this.hand = cards.map((card) => card.value);
+    },
+  },
+  getters: {
+    handString: (state) => {
+      return state.hand.join(" ");
     },
   },
 });
