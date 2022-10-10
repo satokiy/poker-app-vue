@@ -44,13 +44,13 @@ export default defineComponent({
     const draw = () => drawCards.draw();
     const config = new Configuration({
       basePath:
-        "https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev",
+        process.env.VUE_APP_API_URL,
     });
     const pokerApi = new PokerApi(config);
 
     const check = async () => {
       const response = await pokerApi.pokerControllerWelcome();
-      console.log(response.data);
+      console.log(process.env);
       return response.data;
     };
 

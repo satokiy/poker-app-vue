@@ -11,7 +11,7 @@ type card = {
 };
 
 const config = new Configuration({
-  basePath: "https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev",
+  basePath: process.env.VUE_APP_API_URL,
 });
 const pokerApi = new PokerApi(config);
 
