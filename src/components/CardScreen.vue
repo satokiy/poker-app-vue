@@ -1,16 +1,20 @@
 <template>
   <div class="CardScreen">
-    <v-row justify="center" height="150px" dense>
+    <v-row justify="center" min-height="150px" dense>
       <v-card
         v-for="card in drawCards.hand"
         :key="card"
         width="16%"
-        min-height="100"
+        min-height="130"
         max-width="150"
+        elevation="0"
       >
-        <v-col>
-          {{ card }}
-        </v-col>
+        <div v-if="card === ''">
+          <v-img :src="back"> </v-img>
+        </div>
+        <div v-else>
+          <v-img :src="cardImageMapper[card]"> </v-img>
+        </div>
       </v-card>
     </v-row>
   </div>
@@ -18,32 +22,17 @@
 <script lang="ts">
 import { useDrawCard } from "@/stores/drawCard";
 import { defineComponent } from "vue";
+import { cardImageMapper } from "@/services/cardImageMapper";
 export default defineComponent({
   name: "CardScreen",
   setup() {
     const drawCards = useDrawCard();
-
-    const cardBack =
-      "https://4.bp.blogspot.com/-A_98ygeh-hs/WRLiKxndvtI/AAAAAAABEKo/qNM7t47lNCw4Sq0hEwJH5xhUaN8lnJf5gCLcB/s800/card_back.png";
-
-    const cards: (string | null)[] = [
-      "https://2.bp.blogspot.com/-S-31SRfkS1o/WQBAEtCo1nI/AAAAAAABD98/fzjjCIIibhMkeoKx9NfyTo3i1TjRaONPQCLcB/s800/card_spade_01.png",
-      "https://4.bp.blogspot.com/-HUJzhH60Cf0/WQBAFMX2JoI/AAAAAAABD-E/ApHn1B1nwtA6eg1WDh2xWyialgCcPEIRgCLcB/s800/card_spade_02.png",
-      null,
-      null,
-      null,
-    ];
-    const rollCardFront =
-      "https://4.bp.blogspot.com/-HUJzhH60Cf0/WQBAFMX2JoI/AAAAAAABD-E/ApHn1B1nwtA6eg1WDh2xWyialgCcPEIRgCLcB/s800/card_spade_02.png";
-    const rollCardBack =
-      "https://4.bp.blogspot.com/-A_98ygeh-hs/WRLiKxndvtI/AAAAAAABEKo/qNM7t47lNCw4Sq0hEwJH5xhUaN8lnJf5gCLcB/s800/card_back.png";
-
+    const back = cardImageMapper['back'];
+    
     return {
       drawCards,
-      cardBack,
-      cards,
-      rollCardFront,
-      rollCardBack,
+      cardImageMapper,
+      back,
     };
   },
 });
@@ -52,9 +41,9 @@ export default defineComponent({
 <style lang="scss">
 .CardScreen {
   width: 60%;
-  min-height: 200px;
+  min-height: 300px;
   padding-top: 32px;
-  border: 1px red solid;
+  // border: 1px red solid;
 }
 .v-card {
   margin: 8px;

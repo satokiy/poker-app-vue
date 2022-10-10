@@ -4,7 +4,7 @@
   <v-container>
     <v-main>
       <v-row justify="center" margin-bottom="24px">
-        <h1>check a poker hand</h1>
+        <h1>Play Poker</h1>
       </v-row>
       <v-row justify="center" align-content="center">
         <card-screen></card-screen>
@@ -49,7 +49,7 @@ export default defineComponent({
 
 <style lang="scss">
 h1 {
-  border: 1px solid red;
+  // border: 1px solid red;
   margin: 20px;
   padding: 5px;
 }

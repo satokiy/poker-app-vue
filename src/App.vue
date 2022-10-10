@@ -21,7 +21,4 @@ export default defineComponent({
 })
 </script>
 <style lang="scss">
-  .App {
-    border: 1px black solid;
-  }
 </style>

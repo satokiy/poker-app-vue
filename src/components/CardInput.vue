@@ -69,7 +69,7 @@ export default defineComponent({
 
 <style lang="scss">
 .CardInput {
-  border: 1px solid blue;
+  // border: 1px solid blue;
   &__error-msg {
     color: red;
   }
