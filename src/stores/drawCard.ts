@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { PokerApi } from "@/../client/src/api/generated/api";
 import { Configuration } from "@/../client/src/api/generated/configuration";
+import { cardImageMapperIf } from "@/services/cardImageMapper";
 
 type card = {
   value: string;
@@ -16,7 +17,7 @@ const pokerApi = new PokerApi(config);
 
 export const useDrawCard = defineStore("drawCard", {
   state: () => ({
-    hand: ["", "", "", "", ""] as string[],
+    hand: ["", "", "", "", ""] as (keyof cardImageMapperIf | string)[],
     judgeResult: "",
   }),
   actions: {

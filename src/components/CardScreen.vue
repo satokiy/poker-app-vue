@@ -13,7 +13,7 @@
           <v-img :src="back"> </v-img>
         </div>
         <div v-else>
-          <v-img :src="cardImageMapper[card]"> </v-img>
+          <v-img :src="cardImage(card as keyof cardImageMapperIf)"> </v-img>
         </div>
       </v-card>
     </v-row>
@@ -22,17 +22,22 @@
 <script lang="ts">
 import { useDrawCard } from "@/stores/drawCard";
 import { defineComponent } from "vue";
-import { cardImageMapper } from "@/services/cardImageMapper";
+import { cardImageMapper, cardImageMapperIf } from "@/services/cardImageMapper";
 export default defineComponent({
   name: "CardScreen",
   setup() {
+
     const drawCards = useDrawCard();
     const back = cardImageMapper['back'];
+    const cardImage = (card:keyof cardImageMapperIf) => {
+      return cardImageMapper[card];
+    }
     
     return {
       drawCards,
       cardImageMapper,
       back,
+      cardImage
     };
   },
 });
