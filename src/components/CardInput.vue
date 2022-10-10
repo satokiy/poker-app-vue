@@ -1,7 +1,7 @@
 <template>
   <div class="CardInput">
     <v-form>
-      <v-text-field class="input" v-model="drawCards.hand" outlined disabled>
+      <v-text-field class="input" v-model="handString" outlined disabled>
       </v-text-field>
       <v-row class="CardInput__Result">
         <v-col cols="12">
@@ -29,26 +29,36 @@
 
 <script lang="ts">
 import { useDrawCard } from "@/stores/drawCard";
+import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
+import { PokerApi } from "@/../client/src/api/generated/api";
+import { Configuration } from "@/../client/src/api/generated/configuration";
 
 export default defineComponent({
   setup() {
     const drawCards = useDrawCard();
-    const draw = () => drawCards.draw();
+    const { handString } = storeToRefs(drawCards);
 
-    const check = () => {
-      if (JSON.stringify(drawCards.hand) === JSON.stringify(["D1", "D1", "D1", "D4", "D5"])) {
-        drawCards.judgeResult = "straight flash";
-      }
+    const draw = () => drawCards.draw();
+    const config = new Configuration({
+      basePath: 'https://au5s9jy5d8.execute-api.ap-northeast-1.amazonaws.com/dev',
+    });
+    const pokerApi = new PokerApi(config);
+
+    const check = async () => {
+      const response = await pokerApi.pokerControllerWelcome();
+      console.log(response.data);
+      return response.data;
     };
 
     const reset = () => {
-      drawCards.hand = [];
+      drawCards.hand = ["","","","","",];
       drawCards.judgeResult = ''
     }
 
     return {
       drawCards,
+      handString,
       draw,
       check,
       reset,

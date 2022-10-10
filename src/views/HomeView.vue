@@ -14,7 +14,6 @@
           <card-input :hand="reactiveHand.hand"></card-input>
         </v-col>
       </v-row>
-      
     </v-main>
   </v-container>
   <footer-info></footer-info>
@@ -36,26 +35,13 @@ export default defineComponent({
     CardScreen,
   },
   setup() {
-    const check = () => {
-      console.log("check");
-    };
 
     const reactiveHand = reactive({
-      hand: '',
+      hand: "",
     });
-    const draw = () => {
-      // clickイベントによってカードの取得を行いCardScreenに連携する
-      const cards = ["H1", "H2", "H3", "H4", "H5"];
-
-      console.log(cards.join(' '));
-      reactiveHand.hand = cards.join(' ');
-      console.log(reactiveHand.hand);
-    };
 
     return {
       reactiveHand,
-      check,
-      draw,
     };
   },
 });
