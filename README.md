@@ -2,7 +2,9 @@
 
 ### Description
 手札を引いて、Pokerの役判定をするアプリケーションです。  
-Vue3の学習用に作成。  
+このリポジトリはフロントエンドのみを実装し、バックエンドは別途NestjsでAPIを作成しています。  
+NestjsのOpenAPIをもとにOpenAPI GeneratorでAPIクライアントを生成し、フロントエンドから呼び出しています。  
+※2022/10時点で、まだストレートとフラッシュしか判定できません。追って対応します。
 
 ### サイトはこちら
 - https://benevolent-tartufo-457c6c.netlify.app/
