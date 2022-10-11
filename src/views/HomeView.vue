@@ -4,7 +4,7 @@
   <v-container>
     <v-main>
       <v-row justify="center" margin-bottom="24px">
-        <h1>Play Poker</h1>
+        <h1>This is Poker App!</h1>
       </v-row>
       <v-row justify="center" align-content="center">
         <v-col cols="12" sm="8" md="8" lg="8">

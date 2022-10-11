@@ -9,7 +9,6 @@
       </v-row>
       <v-row class="CardInput__Result">
         <v-col cols="12">
-          {{ drawCards.judgeResult }}
         </v-col>
       </v-row>
       <v-row justify="center" class="CardInput__Button">
@@ -17,7 +16,7 @@
           <v-btn @click="draw" color="orange lighten-4" block>draw</v-btn>
         </v-col>
         <v-col cols="6">
-          <v-btn @click="check" color="orange lighten-4" block>play</v-btn>
+          <v-btn @click="judge" color="orange lighten-4" block>judge</v-btn>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -33,8 +32,6 @@
 import { useDrawCard } from "@/stores/drawCard";
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
-import { PokerApi } from "@/../client/src/api/generated/api";
-import { Configuration } from "@/../client/src/api/generated/configuration";
 
 export default defineComponent({
   setup() {
@@ -42,17 +39,7 @@ export default defineComponent({
     const { handString } = storeToRefs(drawCards);
 
     const draw = () => drawCards.draw();
-    const config = new Configuration({
-      basePath:
-        process.env.VUE_APP_API_URL,
-    });
-    const pokerApi = new PokerApi(config);
-
-    const check = async () => {
-      const response = await pokerApi.pokerControllerWelcome();
-      return response.data;
-    };
-
+    const judge = () => drawCards.judge();
     const reset = () => {
       drawCards.hand = ["", "", "", "", ""];
       drawCards.judgeResult = "";
@@ -62,7 +49,7 @@ export default defineComponent({
       drawCards,
       handString,
       draw,
-      check,
+      judge,
       reset,
     };
   },

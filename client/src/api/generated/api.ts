@@ -75,10 +75,10 @@ export interface PlayPokerRequestDto {
 export interface PokerJudgeRequestDto {
   /**
    * 手札
-   * @type {string}
+   * @type {Array<string>}
    * @memberof PokerJudgeRequestDto
    */
-  hand: string;
+  hand: Array<string>;
 }
 /**
  *
@@ -88,16 +88,10 @@ export interface PokerJudgeRequestDto {
 export interface PokerJudgeResponse {
   /**
    * 手札
-   * @type {string}
-   * @memberof PokerJudgeResponse
-   */
-  hand: string;
-  /**
-   * カードリスト
    * @type {Array<string>}
    * @memberof PokerJudgeResponse
    */
-  cardList: Array<string>;
+  hand: Array<string>;
   /**
    * 役
    * @type {string}
