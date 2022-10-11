@@ -1,11 +1,11 @@
 <template>
-  <div class="CardScreen">
-    <v-row justify="center" min-height="150px" dense>
+  <div class="CardScreen" v-cloak>
+    <v-row class="CardScreen__Card" justify="center" min-height="100px" dense>
       <v-card
         v-for="card in drawCards.hand"
         :key="card"
         width="16%"
-        min-height="130"
+        min-height="100"
         max-width="150"
         elevation="0"
       >
@@ -14,8 +14,13 @@
         </div>
         <div v-else>
           <v-img :src="cardImage(card as keyof cardImageMapperIf)"> </v-img>
-        </div>
+        </div>      
       </v-card>
+    </v-row>
+    <v-row class="CardScreen__Result" justify="center" dense>
+      <span v-if="drawCards.judgeResult !== ''"> 
+        {{ drawCards.judgeResult }}
+      </span>
     </v-row>
   </div>
 </template>
@@ -26,18 +31,17 @@ import { cardImageMapper, cardImageMapperIf } from "@/services/cardImageMapper";
 export default defineComponent({
   name: "CardScreen",
   setup() {
-
     const drawCards = useDrawCard();
-    const back = cardImageMapper['back'];
-    const cardImage = (card:keyof cardImageMapperIf) => {
+    const back = cardImageMapper["back"];
+    const cardImage = (card: keyof cardImageMapperIf) => {
       return cardImageMapper[card];
-    }
-    
+    };
+
     return {
       drawCards,
       cardImageMapper,
       back,
-      cardImage
+      cardImage,
     };
   },
 });
@@ -45,13 +49,18 @@ export default defineComponent({
 
 <style lang="scss">
 .CardScreen {
-  min-height: 300px;
+  min-height: 260px;
   padding-top: 32px;
-  // border: 1px red solid;
+  &__Card {
+    margin-bottom: 12px;
+  }
+  &__Result {
+    font-size: 24px;
+  }
 }
 .v-card {
-  margin: 8px;
-  min-width: 64px;
+  margin: 4px;
+  min-width: 60px;
 }
 .Card {
   min-height: 150px;
