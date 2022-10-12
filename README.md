@@ -4,7 +4,6 @@
 - 手札を引いて、Pokerの役判定をするアプリケーションです。
 - このリポジトリではフロントエンドのみを実装し、バックエンドは別途NestjsでAPIを作成しています。
 - NestjsのOpenAPIをもとにOpenAPI GeneratorでAPIクライアントを生成し、フロントエンドから呼び出しています。
-- ※2022/10時点で、まだストレートとフラッシュしか判定できません。追って対応します。
 
 ### アプリはこちら
 - https://benevolent-tartufo-457c6c.netlify.app/
@@ -27,7 +26,8 @@ yarn serve
 ```
 ```
 # build to /dist
-yarn build-${env}
+yarn build-dev # development
+yarn build-prod # production
 ```
 
 ### API clientの更新
