@@ -3,13 +3,12 @@
     <v-form>
       <v-row>
         <v-col cols="12">
-        <v-text-field class="input" v-model="handString" outlined disabled>
-        </v-text-field>
-      </v-col>
+          <v-text-field class="input" v-model="handString" outlined disabled>
+          </v-text-field>
+        </v-col>
       </v-row>
       <v-row class="CardInput__Result">
-        <v-col cols="12">
-        </v-col>
+        <v-col cols="12"> </v-col>
       </v-row>
       <v-row justify="center" class="CardInput__Button">
         <v-col cols="6">
@@ -22,6 +21,11 @@
       <v-row justify="center">
         <v-col cols="6">
           <v-btn @click="reset" color="white lighten-4" block>reset</v-btn>
+        </v-col>
+      </v-row>
+      <v-row v-show="isIframe" justify="center">
+        <v-col cols="6">
+          <v-btn @click="close" color="white lighten-4" block>finish</v-btn>
         </v-col>
       </v-row>
     </v-form>
@@ -45,12 +49,26 @@ export default defineComponent({
       drawCards.judgeResult = "";
     };
 
+    let isIframe = false;
+    if (window.parent !== window) isIframe = true;
+
+    const close = () => {
+      if (window.parent !== window) {
+        const message = JSON.stringify({
+          message: "CANCEL_MODAL",
+        });
+        window.parent.postMessage(message, "*");
+      }
+    };
+
     return {
       drawCards,
       handString,
       draw,
       judge,
       reset,
+      isIframe,
+      close,
     };
   },
 });
